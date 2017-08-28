@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Grid } from 'react-bootstrap';
 import AppNav from './AppNav';
+import Graph from './Graph';
 
-import grailsLogo from './images/grails-cupsonly-logo-white.svg';
-import reactLogo from './images/logo.svg';
 import { SERVER_URL, CLIENT_VERSION, REACT_VERSION } from './config';
 import 'whatwg-fetch';
 
@@ -22,7 +21,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch(SERVER_URL + '/application')
+    fetch(SERVER_URL + 'application')
       .then(r => r.json())
       .then(json => this.setState({serverInfo: json}))
       .catch(error => console.error('Error connecting to server: ' + error));
@@ -36,12 +35,6 @@ class App extends Component {
     return (
       <div>
         <AppNav serverInfo={serverInfo} clientInfo={clientInfo}/>
-        <div className="grails-logo-container">
-          <img className="grails-logo" src={grailsLogo} alt="Grails" />
-          <span className="plus-logo">+</span>
-          <img className="hero-logo" src={reactLogo} alt="React" />
-        </div>
-
         <Grid>
           <div id="content">
             <section className="row colset-2-its">
@@ -61,6 +54,9 @@ class App extends Component {
                   }) : null }
                 </ul>
               </div>
+            </section>
+            <section>
+              <Graph></Graph>
             </section>
 
           </div>
