@@ -76,11 +76,10 @@ hibernate:
         use_second_level_cache: false
         use_query_cache: false
 dataSource:
-    pooled: true
-    jmxExport: true
     driverClassName: org.h2.Driver
     username: system
     password: 'oracle'
+    logSql: true
 
 environments:
     development:
