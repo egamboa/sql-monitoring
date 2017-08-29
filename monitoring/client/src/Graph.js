@@ -19,7 +19,7 @@ class Graph extends Component {
       .then(r => r.json())
       .then(json => this.setState({monitoring: json}))
       .catch(error => console.error('Error connecting to server: ' + error));
-    }, 1000);
+    }, 2000);
   }
 
   render () {
@@ -31,13 +31,13 @@ class Graph extends Component {
     }
     var data = {
       date: new Date(),
-      Max: max,
-      Free: free,
-      Current: current
+      'Maximum SGA Size': max,
+      'Free SGA Memory Available': free,
+      'Current Allocated Memory': current
     };
 
     return <RTChart
-            fields={['Max','Free', 'Current']}
+            fields={['Maximum SGA Size','Free SGA Memory Available', 'Current Allocated Memory']} 
             data={data} />
   }
 }

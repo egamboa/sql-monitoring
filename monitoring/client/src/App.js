@@ -25,7 +25,6 @@ class App extends Component {
       .then(r => r.json())
       .then(json => this.setState({serverInfo: json}))
       .catch(error => console.error('Error connecting to server: ' + error));
-
   }
 
   render() {
@@ -38,12 +37,11 @@ class App extends Component {
         <Grid>
           <div id="content">
             <section className="row colset-2-its">
-              <h1 style={{textAlign: 'center'}}>Welcome to Grails</h1>
+              <h1 style={{textAlign: 'center'}}>SQL SGA Memory Monitoring</h1>
               <br/>
               <p>
-                Congratulations, you have successfully started your first Grails + React application! While in development mode, changes will be loaded automatically when you edit your React app, without even refreshing the page.
-                Below is a list of controllers that are currently deployed in
-                this application, click on each to execute its default action:
+                This is a grails web application connecting to Oracle SQL server. Pulling the status of
+                the System General Area.
               </p>
 
               <div id="controllers" role="navigation">

@@ -1,12 +1,13 @@
-set linesize 200
-
-conn system/oracle
-
--- Para desbloquear hr
-alter user monitoring account unlock;
-
---Para cambiar la clave
-alter user monitoring identified by monitoring;
-
-conn monitoring/monitoring
-
+GRANT SELECT ANY DICTIONARY TO SYSTEM; 
+drop function SGASIZE;
+CREATE FUNCTION SGASIZE(PName in VARCHAR2)
+   RETURN NUMBER is
+   Vresultado number;
+      BEGIN 
+	SELECT BYTES 
+	INTO Vresultado 
+	FROM v$sgainfo 
+	WHERE name= PName;
+    RETURN(Vresultado); 
+END;
+show error
