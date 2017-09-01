@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Grid } from 'react-bootstrap';
 import AppNav from './AppNav';
-import Graph from './Graph';
+import Sga from './Sga/Sga';
 
 import { SERVER_URL, CLIENT_VERSION, REACT_VERSION } from './config';
 import 'whatwg-fetch';
@@ -36,14 +36,7 @@ class App extends Component {
         <AppNav serverInfo={serverInfo} clientInfo={clientInfo}/>
         <Grid>
           <div id="content">
-            <section className="row colset-2-its">
-              <h1 style={{textAlign: 'center'}}>SQL SGA Memory Monitoring</h1>
-              <br/>
-              <p>
-                This is a grails web application connecting to Oracle SQL server. Pulling the status of
-                the System General Area.
-              </p>
-
+            <section>
               <div id="controllers" role="navigation">
                 <h2>Available Controllers:</h2>
                 <ul>
@@ -53,10 +46,7 @@ class App extends Component {
                 </ul>
               </div>
             </section>
-            <section>
-              <Graph></Graph>
-            </section>
-
+            <Sga></Sga>
           </div>
         </Grid>
       </div>
