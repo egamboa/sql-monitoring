@@ -6,7 +6,7 @@ import Graph from './Graph';
 import Highmark from './Highmark';
 
 class Sga extends Component {
-  constructor () {
+  constructor() {
     super();
 
     this.state = {
@@ -18,21 +18,26 @@ class Sga extends Component {
   componentDidMount() {
     setInterval(() => {
       fetch(SERVER_URL + 'monitoring')
-      .then(r => r.json())
-      .then(json => this.setState({monitoring: json}))
-      .catch(error => console.error('Error connecting to server: ' + error));
+        .then(r => r.json())
+        .then(json => this.setMonitoringData(json))
+        .catch(error => console.error('Error connecting to server: ' + error));
     }, 4000);
+  }
+
+  setMonitoringData = (json) => {
+    console.log(json);
+    this.setState({ monitoring: json });
   }
 
   handleChange = (e) => {
     this.setState({ highmark: e.target.value });
   }
 
-  render () {
+  render() {
     return <div>
       <section className="row colset-2-its">
-        <h1 style={{textAlign: 'center'}}>SGA Memory Monitoring</h1>
-        <br/>
+        <h1 style={{ textAlign: 'center' }}>SGA Memory Monitoring</h1>
+        <br />
         <p>
           This is a grails web application connecting to Oracle SQL server. Pulling the status of
           the System General Area.
