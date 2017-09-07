@@ -17,7 +17,7 @@ class Highmark extends Component {
           controlId="formBasicText"
           validationState={this.getValidationState()}
         >
-          <ControlLabel>Add a High Water Mark to return warnings</ControlLabel>
+          <ControlLabel>Add a High Water % Mark to return warnings</ControlLabel>
           <FormControl
             type="text"
             value={this.props.highmark}
