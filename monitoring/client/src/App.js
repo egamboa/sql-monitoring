@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Grid } from 'react-bootstrap';
+import { Grid, Row, Col } from 'react-bootstrap';
 import AppNav from './AppNav';
 import Sga from './Sga/Sga';
+import Tablespace from './Tablespace/Tablespace';
 
 import { SERVER_URL, CLIENT_VERSION, REACT_VERSION } from './config';
 import 'whatwg-fetch';
@@ -23,7 +24,7 @@ class App extends Component {
   componentDidMount() {
     fetch(SERVER_URL + 'application')
       .then(r => r.json())
-      .then(json => this.setState({serverInfo: json}))
+      .then(json => this.setState({ serverInfo: json }))
       .catch(error => console.error('Error connecting to server: ' + error));
   }
 
@@ -33,20 +34,23 @@ class App extends Component {
 
     return (
       <div>
-        <AppNav serverInfo={serverInfo} clientInfo={clientInfo}/>
+        <AppNav serverInfo={serverInfo} clientInfo={clientInfo} />
         <Grid>
-          <div id="content">
+          <div>
             <section>
-              <div id="controllers" role="navigation">
-                <h2>Available Controllers:</h2>
-                <ul>
-                  {serverInfo.controllers ? serverInfo.controllers.map(controller => {
-                    return <li key={controller.name}><a href={SERVER_URL + controller.logicalPropertyName}>{ controller.name }</a></li>;
-                  }) : null }
-                </ul>
-              </div>
+              <Row>
+                <Col xs={12}>
+                  <h1>Oracle SQL Server Monitoring</h1>
+                  <p>
+                    This is a grails web application connecting to Oracle SQL server. Pulling the status of
+                  the System General Area.
+                </p>
+                  <br /><hr /><br />
+                </Col>
+              </Row>
             </section>
-            <Sga></Sga>
+            <Sga />
+            <Tablespace />
           </div>
         </Grid>
       </div>

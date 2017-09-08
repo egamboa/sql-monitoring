@@ -67,7 +67,7 @@ class Chart extends Component {
     this.chart = new window.CanvasJS.Chart('chartContainer', {
       zoomEnabled: true,
       title: {
-        text: 'SGA Memory Monitoring'
+        text: 'SGA Memory'
       },
       toolTip: {
         shared: true
@@ -127,7 +127,6 @@ class Chart extends Component {
         dataPoints: this.dataHighmark
       }]
     });
-
     this.updateData();
   }
 
@@ -136,10 +135,8 @@ class Chart extends Component {
   }
 
   render() {
-
     return (
-      <div id="chartContainer" style={{ height: 450 + "px", width: 100 + "%" }}>
-      </div>
+      <div id="chartContainer" style={{ height: 450 + "px", width: 100 + "%" }}></div>
     );
   }
 }

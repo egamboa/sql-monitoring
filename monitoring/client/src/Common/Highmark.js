@@ -12,7 +12,7 @@ class Highmark extends Component {
 
   render() {
     return (
-      <form className="col-sm-4">
+      <form>
         <FormGroup
           controlId="formBasicText"
           validationState={this.getValidationState()}
