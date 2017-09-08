@@ -41,10 +41,7 @@ class App extends Component {
               <Row>
                 <Col xs={12}>
                   <h1>Oracle SQL Server Monitoring</h1>
-                  <p>
-                    This is a grails web application connecting to Oracle SQL server. Pulling the status of
-                  the System General Area.
-                </p>
+                  <p>This is a grails web application connecting to Oracle SQL server.</p>
                   <br /><hr /><br />
                 </Col>
               </Row>

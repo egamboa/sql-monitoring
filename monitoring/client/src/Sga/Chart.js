@@ -71,7 +71,6 @@ class Chart extends Component {
       },
       toolTip: {
         shared: true
-
       },
       legend: {
         verticalAlign: 'top',
@@ -92,7 +91,8 @@ class Chart extends Component {
         }
       },
       axisX: {
-        title: 'Chart updates every second'
+        title: 'Chart updates every second',
+        labelFontSize: 14
       },
       axisY: {
         suffix: 'MB',

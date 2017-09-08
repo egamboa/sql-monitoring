@@ -10,7 +10,7 @@ import Queries from './Queries';
 class Sga extends Component {
   constructor() {
     super();
-    this.intervalTime = 4000;
+    this.intervalTime = 12000;
     this.state = {
       monitoring: [],
       highmark: '80',

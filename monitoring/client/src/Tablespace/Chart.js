@@ -11,21 +11,22 @@ class Chart extends Component {
       animationEnabled: true,
       axisX: {
         interval: 1,
-        labelFontSize: 10,
+        labelFontSize: 16,
         lineThickness: 0
       },
       axisY2: {
         valueFormatString: "0 GB",
-        lineThickness: 0
+        lineThickness: 0,
+        labelFontSize: 16
       },
       toolTip: {
         shared: true
       },
       legend: {
+        fontSize: 16,
         verticalAlign: "top",
         horizontalAlign: "center"
       },
-
       data: [
         {
           type: "stackedBar",

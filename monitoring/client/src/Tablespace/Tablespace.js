@@ -36,7 +36,7 @@ class Sga extends Component {
   render() {
     return <section>
       <Row>
-        <Col xs={12}>
+        <Col xs={4}>
           <h1><strong>Tablespace Disk Monitoring</strong></h1>
           <br />
           <Highmark highmark={this.state.highmark} handleChange={this.handleChange}></Highmark>
