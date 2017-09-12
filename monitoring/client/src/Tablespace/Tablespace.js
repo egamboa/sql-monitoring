@@ -9,7 +9,7 @@ import Chart from './Chart';
 class Sga extends Component {
   constructor() {
     super();
-
+    this.intervalTime = 10000;
     this.state = {
       monitoring: [],
       highmark: '80'
@@ -18,11 +18,11 @@ class Sga extends Component {
 
   componentDidMount() {
     setInterval(() => {
-      fetch(SERVER_URL + 'monitoring?type=sga')
+      fetch(SERVER_URL + 'monitoring?type=ts')
         .then(r => r.json())
         .then(json => this.setMonitoringData(json))
         .catch(error => console.error('Error connecting to server: ' + error));
-    }, 4000);
+    }, this.intervalTime);
   }
 
   setMonitoringData = (json) => {
@@ -43,7 +43,7 @@ class Sga extends Component {
         </Col>
       </Row>
       <Row>
-        <Chart />
+        <Chart monitoring={this.state.monitoring} highmark={this.state.highmark} />
       </Row>
       <Row>
         <br /><hr /><br />

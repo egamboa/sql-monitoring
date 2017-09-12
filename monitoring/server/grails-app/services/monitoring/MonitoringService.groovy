@@ -24,22 +24,12 @@ class MonitoringService {
 
     def getTablespace () {
         final Sql sql = new Sql(dataSource)
-        def row = sql.rows("SELECT "
-            + "df.tablespace_name AS 'Tablespace' "
-            + ",df.bytes / (1024 * 1024) AS 'Size (MB)' "
-            + ",fs.bytes / (1024 * 1024) AS 'Free (MB)' "
-            + ",(df.bytes / (1024 * 1024))*0.85 AS 'HWM (MB)' "
-            + ", consumoBytes(df.tablespace_name)AS 'CONSUMO' "
-            + "FROM ("
-            + "SELECT tablespace_name "
-            + ",Sum(bytes) AS bytes "
-            + "FROM dba_free_space "
-            + "GROUP BY tablespace_name) fs, "
-            + "(SELECT tablespace_name,SUM(bytes) AS bytes "
-            + "FROM dba_data_files "
-            + "GROUP BY tablespace_name ) df "
-            + "WHERE fs.tablespace_name = df.tablespace_name "
-            + "ORDER BY 3 DESC;")
-        return row
+        def row1 = sql.rows("SELECT df.tablespace_name AS \"tablespace\", df.bytes / (1024 * 1024) AS \"max_size\", fs.bytes / (1024 * 1024) AS \"free\" FROM ( SELECT tablespace_name, Sum(bytes) AS bytes FROM dba_free_space GROUP BY tablespace_name) fs,( SELECT tablespace_name ,SUM(bytes) AS bytes FROM dba_data_files GROUP BY tablespace_name ) df WHERE fs.tablespace_name = df.tablespace_name ORDER BY 3 DESC")
+        row1 = row1.collect{
+            def row2 = sql.rows("SELECT Sum(VSIZE(user_tab_columns.column_name)) Sumatoria FROM DBA_TABLESPACES INNER JOIN dba_tables ON dba_tablespaces.TABLESPACE_NAME = dba_tables.TABLESPACE_NAME INNER JOIN user_tab_columns ON dba_tables.table_name = user_tab_columns.table_name WHERE dba_tablespaces.TABLESPACE_NAME = \'" + it.tablespace + "\'")
+            it << row2[0]
+            it
+        }
+        return row1
     }
 }

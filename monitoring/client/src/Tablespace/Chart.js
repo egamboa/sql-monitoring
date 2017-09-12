@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
 class Chart extends Component {
+  dataBusy = [];
+  dataHighmark = [];
+  dataMax = [];
   chart = {};
 
   componentDidMount() {
@@ -15,7 +18,7 @@ class Chart extends Component {
         lineThickness: 0
       },
       axisY2: {
-        valueFormatString: "0 GB",
+        valueFormatString: "0 MB",
         lineThickness: 0,
         labelFontSize: 16
       },
@@ -31,44 +34,53 @@ class Chart extends Component {
         {
           type: "stackedBar",
           showInLegend: true,
-          name: "Busy Space GB",
+          name: "Busy Space MB",
           axisYType: "secondary",
           color: "#7E8F74",
-          dataPoints: [
-            { y: 3, label: "Tablespace 1" },
-            { y: 5, label: "Tablespace 2" },
-            { y: 3, label: "Tablespace 3" },
-            { y: 6, label: "Tablespace 4" }
-          ]
+          dataPoints: this.dataBusy
         },
         {
           type: "stackedBar",
           showInLegend: true,
-          name: "Highwater Mark GB",
+          name: "Highwater Mark MB",
           axisYType: "secondary",
           color: "#F0E6A7",
-          dataPoints: [
-            { y: .5, label: "Tablespace 1" },
-            { y: 1.5, label: "Tablespace 2" },
-            { y: 1, label: "Tablespace 3" },
-            { y: 2, label: "Tablespace 4" }
-          ]
+          dataPoints: this.dataHighmark
         },
         {
           type: "stackedBar",
           showInLegend: true,
-          name: "Maxsize Space GB",
+          name: "Maxsize Space MB",
           axisYType: "secondary",
           color: "#EBB88A",
-          dataPoints: [
-            { y: 2, label: "Tablespace 1" },
-            { y: 3, label: "Tablespace 2" },
-            { y: 3, label: "Tablespace 3" },
-            { y: 3, label: "Tablespace 4" }
-          ]
+          dataPoints: this.dataMax
         }
       ]
     });
+    this.chart.render();
+  }
+
+  componentDidUpdate() {
+    let busy, highmark, max;
+
+    this.props.monitoring.forEach((ts) => {
+      if (this.dataBusy.length === this.props.monitoring.length) {
+        this.dataBusy.shift(); this.dataHighmark.shift(); this.dataMax.shift();
+      }
+      busy = ts.max_size - ts.free;
+      highmark = (ts.max_size - (ts.max_size * (1 - (this.props.highmark / 100)))) - busy;
+      if(highmark > 0) {
+        max = ts.max_size - (highmark + busy);
+      } else {
+        max = ts.max_size - busy;
+      }
+      this.dataBusy.push({ y: busy, label: ts.tablespace });
+      this.dataHighmark.push({ y: highmark, label: ts.tablespace });
+      this.dataMax.push({ y: max, label: ts.tablespace });
+    });
+
+    //this.chart.options.data[0].legendText = ' Maximum SGA Size ' + this.dataMax[this.dataMax.length - 1].y + 'MB';
+    
     this.chart.render();
   }
 

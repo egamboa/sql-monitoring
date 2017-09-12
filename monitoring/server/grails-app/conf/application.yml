@@ -77,8 +77,9 @@ hibernate:
         use_query_cache: false
 dataSource:
     driverClassName: org.h2.Driver
-    username: system
-    password: 'oracle'
+    username: sys
+    password: oracle
+    internal_logon: sysdba
     logSql: true
 
 environments:
@@ -88,8 +89,8 @@ environments:
             url: jdbc:oracle:thin:@192.168.56.1:1521:orcl12c
             driverClassName: oracle.jdbc.OracleDriver
             dialect: org.hibernate.dialect.Oracle10gDialect
-            username: "system"
-            password: "oracle"
+            username: sys as sysdba
+            password: oracle
     test:
         dataSource:
             dbCreate: update
