@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import AppNav from './AppNav';
-import Sga from './Sga/Sga';
-import Tablespace from './Tablespace/Tablespace';
+import Main from './Main';
 
 import { SERVER_URL, CLIENT_VERSION, REACT_VERSION } from './config';
 import 'whatwg-fetch';
@@ -46,8 +45,7 @@ class App extends Component {
                 </Col>
               </Row>
             </section>
-            <Sga />
-            <Tablespace />
+            <Main />
           </div>
         </Grid>
       </div>

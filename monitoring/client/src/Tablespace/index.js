@@ -14,19 +14,20 @@ class Sga extends Component {
       monitoring: [],
       highmark: '80'
     }
+    this.intervalInstance = null;
   }
 
   componentDidMount() {
-    setInterval(() => {
+    this.intervalInstance = setInterval(() => {
       fetch(SERVER_URL + 'monitoring?type=ts')
         .then(r => r.json())
-        .then(json => this.setMonitoringData(json))
+        .then(json => this.setState({ monitoring: json }))
         .catch(error => console.error('Error connecting to server: ' + error));
     }, this.intervalTime);
   }
 
-  setMonitoringData = (json) => {
-    this.setState({ monitoring: json });
+  componentWillUnmount() {
+    clearInterval(this.intervalInstance);
   }
 
   handleChange = (e) => {

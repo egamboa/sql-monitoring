@@ -5,6 +5,8 @@ class Chart extends Component {
   dataHighmark = [];
   dataMax = [];
   chart = {};
+  realHighmark = [];
+  realMax = [];
 
   componentDidMount() {
     this.chart = new window.CanvasJS.Chart("chartContainer2", {
@@ -34,25 +36,25 @@ class Chart extends Component {
         {
           type: "stackedBar",
           showInLegend: true,
-          name: "Busy Space MB",
+          name: "Busy MB",
           axisYType: "secondary",
-          color: "#7E8F74",
+          color: "#CD5555",
           dataPoints: this.dataBusy
         },
         {
           type: "stackedBar",
           showInLegend: true,
-          name: "Highwater Mark MB",
+          name: "HWM MB",
           axisYType: "secondary",
-          color: "#F0E6A7",
+          color: "#9bf09d",
           dataPoints: this.dataHighmark
         },
         {
           type: "stackedBar",
           showInLegend: true,
-          name: "Maxsize Space MB",
+          name: "Max Size MB",
           axisYType: "secondary",
-          color: "#EBB88A",
+          color: "#19a337",
           dataPoints: this.dataMax
         }
       ]
@@ -61,25 +63,31 @@ class Chart extends Component {
   }
 
   componentDidUpdate() {
-    let busy, highmark, max;
+    let busy, highmark, max, highmarkBar;
 
-    this.props.monitoring.forEach((ts) => {
+    this.props.monitoring.forEach((ts, index) => {
       if (this.dataBusy.length === this.props.monitoring.length) {
         this.dataBusy.shift(); this.dataHighmark.shift(); this.dataMax.shift();
       }
       busy = ts.max_size - ts.free;
-      highmark = (ts.max_size - (ts.max_size * (1 - (this.props.highmark / 100)))) - busy;
-      if(highmark > 0) {
-        max = ts.max_size - (highmark + busy);
+      highmark = ts.max_size - (ts.max_size * (1 - (this.props.highmark / 100)));
+      highmarkBar = highmark - busy;
+      if(highmarkBar > 0) {
+        max = ts.max_size - (highmarkBar + busy);
       } else {
+        highmarkBar = 0;
         max = ts.max_size - busy;
       }
       this.dataBusy.push({ y: busy, label: ts.tablespace });
-      this.dataHighmark.push({ y: highmark, label: ts.tablespace });
+      this.dataHighmark.push({ y: highmarkBar, label: ts.tablespace });
       this.dataMax.push({ y: max, label: ts.tablespace });
+      this.realHighmark.push({ y: highmark, label: ts.tablespace });
+      this.realMax.push({ y: ts.max_size, label: ts.tablespace });
     });
-
-    //this.chart.options.data[0].legendText = ' Maximum SGA Size ' + this.dataMax[this.dataMax.length - 1].y + 'MB';
+ 
+    // this.chart.data[1].options.dataPoints = this.realHighmark;
+    // this.chart.data[2].options.dataPoints = this.realMax;
+    console.log(this.chart.data[2].options);
     
     this.chart.render();
   }

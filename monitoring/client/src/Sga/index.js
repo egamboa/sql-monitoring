@@ -10,21 +10,26 @@ import Queries from './Queries';
 class Sga extends Component {
   constructor() {
     super();
-    this.intervalTime = 12000;
+    this.intervalTime = 30000;
     this.state = {
       monitoring: [],
       highmark: '80',
       queries: []
     }
+    this.intervalInstance = null;
   }
 
   componentDidMount() {
-    setInterval(() => {
+    this.intervalInstance = setInterval(() => {
       fetch(SERVER_URL + 'monitoring?type=sga')
         .then(r => r.json())
         .then(json => this.setMonitoringData(json))
         .catch(error => console.error('Error connecting to server: ' + error));
     }, this.intervalTime);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.intervalInstance);
   }
 
   toMB = (bytes) => {

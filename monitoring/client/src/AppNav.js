@@ -1,14 +1,15 @@
 import React from 'react';
-import { Navbar, NavDropdown, Nav, MenuItem } from 'react-bootstrap';
+import { LinkContainer, IndexLinkContainer } from 'react-router-bootstrap'
+import { Navbar, NavDropdown, Nav, MenuItem, NavItem } from 'react-bootstrap';
 
 import grailsLogo from './images/grails-cupsonly-logo-white.svg';
 import 'whatwg-fetch';
 
-function AppNav({serverInfo, clientInfo}) {
+function AppNav ({serverInfo, clientInfo}) {
 
-  const {environment, appprofile, appversion, grailsversion, reloadingagentenabled, artefacts, plugins} = serverInfo;
+  const {environment, appprofile, appversion, grailsversion, reloadingagentenabled, artefacts, plugins} = serverInfo; 
 
-  return(
+  return (
     <Navbar style={{backgroundColor: '#4D8618', backgroundImage: 'none', borderRadius: 0}}>
       <Navbar.Header>
         <Navbar.Brand>
@@ -20,6 +21,12 @@ function AppNav({serverInfo, clientInfo}) {
       </Navbar.Header>
       <Navbar.Collapse>
         <Nav pullRight>
+          <IndexLinkContainer to="/">
+            <NavItem>Sga</NavItem>
+          </IndexLinkContainer>
+          <LinkContainer to="/tablespace">
+            <NavItem>Tablespaces</NavItem>
+          </LinkContainer>
           <NavDropdown eventKey="4" title="Application Status " id="app-status">
             <MenuItem eventKey="4.1">Environment: {environment}</MenuItem>
             <MenuItem eventKey="4.2">Grails profile: {appprofile}</MenuItem>
