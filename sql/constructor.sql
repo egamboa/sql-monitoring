@@ -1,4 +1,4 @@
-STARTUP NOMOUNT PFILE='/home/oracle/hsjd/parameters/inithsjd.ora';
+#STARTUP NOMOUNT PFILE='/home/oracle/hsjd/parameters/inithsjd.ora';
 
 CREATE DATABASE hsjd
   USER hsjd IDENTIFIED BY hsjdpass

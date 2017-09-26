@@ -1,7 +1,7 @@
 ###########################################
 # Database Identification
 ###########################################
-db_name="hsjd"
+db_name='hsjd'
 db_domain=''
 
 ###########################################
@@ -17,7 +17,7 @@ processes=300
 ###########################################
 # Security and Auditing
 ###########################################
-audit_file_dest="/u01/app/oracle/admin/orcl12c/adump"
+audit_file_dest='/u01/app/oracle/admin/orcl12c/adump'
 audit_trail=db
 remote_login_passwordfile=EXCLUSIVE
 
@@ -34,14 +34,14 @@ open_cursors=300
 ###########################################
 # File Configuration
 ###########################################
-control_files=("/u01/app/oracle/oradata/orcl12c/control01.ctl", "/u01/app/oracle/fast_recovery_area/orcl12c/control02.ctl")
-db_recovery_file_dest="/u01/app/oracle/fast_recovery_area/orcl12c"
+control_files=('/u01/app/oracle/oradata/orcl12c/control01.ctl', '/u01/app/oracle/fast_recovery_area/orcl12c/control02.ctl')
+db_recovery_file_dest='/u01/app/oracle/fast_recovery_area/orcl12c'
 db_recovery_file_dest_size=2g
 
 ###########################################
 # Shared Server
 ###########################################
-dispatchers="(PROTOCOL=TCP) (SERVICE=orcl12cXDB)"
+dispatchers='(PROTOCOL=TCP) (SERVICE=orcl12cXDB)'
 
 ###########################################
 # System Managed Undo and Rollback Segments
