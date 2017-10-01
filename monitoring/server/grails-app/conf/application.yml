@@ -86,7 +86,7 @@ environments:
     development:
         dataSource:
             dbCreate: validate
-            url: jdbc:oracle:thin:@192.168.56.1:1521:orcl12c
+            url: jdbc:oracle:thin:@192.168.56.101:1521:orcl
             driverClassName: oracle.jdbc.OracleDriver
             dialect: org.hibernate.dialect.Oracle10gDialect
             username: sys as sysdba
