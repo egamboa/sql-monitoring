@@ -7,7 +7,7 @@ db_domain=''
 ###########################################
 # Main Memory
 ###########################################
-memory_target=1g
+memory_target=457179136
 
 ###########################################
 # Processes and Sessions
@@ -17,8 +17,8 @@ processes=300
 ###########################################
 # Security and Auditing
 ###########################################
-audit_file_dest='/u01/app/oracle/admin/orcl12c/adump'
-audit_trail=db
+audit_file_dest='/home/oracle/app/oracle/admin/orcl/adump'
+audit_trail=DB
 remote_login_passwordfile=EXCLUSIVE
 
 ###########################################
@@ -34,28 +34,27 @@ open_cursors=300
 ###########################################
 # File Configuration
 ###########################################
-control_files=('/u01/app/oracle/oradata/orcl12c/control01.ctl', '/u01/app/oracle/fast_recovery_area/orcl12c/control02.ctl')
-db_recovery_file_dest='/u01/app/oracle/fast_recovery_area/orcl12c'
-db_recovery_file_dest_size=2g
+control_files=/home/oracle/hsjd/parameters/control01.ctl, /home/oracle/hsjd/parameters/control02.ctl
+db_recovery_file_dest="/home/oracle/app/oracle/flash_recovery_area"
+db_recovery_file_dest_size=4039114752
 
 ###########################################
 # Shared Server
 ###########################################
-dispatchers='(PROTOCOL=TCP) (SERVICE=orcl12cXDB)'
+dispatchers="(PROTOCOL=TCP) (SERVICE=orclXDB)"
 
 ###########################################
 # System Managed Undo and Rollback Segments
 ###########################################
-undo_tablespace=UNDOTBS1
+undo_tablespace='UNDOTBS1'
 
 ###########################################
 # Network Registration
 ###########################################
-local_listener=LISTENER_ORCL12C
+local_listener=LISTENER_ORCL
 
 ###########################################
 # Miscellaneous
 ###########################################
-compatible=12.2.0
-diagnostic_dest=/u01/app/oracle
-enable_pluggable_database=true
+compatible=11.2.0.0.0
+diagnostic_dest=/home/oracle/app/oracle
