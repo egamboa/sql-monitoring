@@ -27,6 +27,9 @@ function AppNav ({serverInfo, clientInfo}) {
           <LinkContainer to="/tablespace">
             <NavItem>Tablespaces</NavItem>
           </LinkContainer>
+          <LinkContainer to="/logs">
+            <NavItem>Logs</NavItem>
+          </LinkContainer>
           <NavDropdown eventKey="4" title="Application Status " id="app-status">
             <MenuItem eventKey="4.1">Environment: {environment}</MenuItem>
             <MenuItem eventKey="4.2">Grails profile: {appprofile}</MenuItem>

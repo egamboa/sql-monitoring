@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Chart extends Component {
   barSize = 50;
   chart = {};
-  chartHeight = 100;
+  chartHeight = 600;
   dataBusy = [];
   dataHighmark = [];
   dataMax = [];
@@ -14,9 +14,10 @@ class Chart extends Component {
   lineThickness = 0;
 
   componentDidMount() {
-    this.chart = new window.CanvasJS.Chart("chartContainer2", {
+    this.chart = new window.CanvasJS.Chart('chartContainer2', {
       title: {
-        text: "Tablespace Disk Usage"
+        text: 'Tablespace Disk Usage',
+        fontSize: 30
       },
       animationEnabled: true,
       axisX: {
@@ -25,7 +26,7 @@ class Chart extends Component {
         lineThickness: this.lineThickness
       },
       axisY2: {
-        valueFormatString: "0 MB",
+        valueFormatString: '0 MB',
         lineThickness: this.lineThickness,
         labelFontSize: this.labelFontSize
       },
@@ -34,32 +35,32 @@ class Chart extends Component {
       },
       legend: {
         fontSize: this.labelFontSize,
-        verticalAlign: "top",
-        horizontalAlign: "center"
+        verticalAlign: 'top',
+        horizontalAlign: 'center'
       },
       data: [
         {
-          type: "stackedBar",
+          type: 'stackedBar',
           showInLegend: true,
-          name: "Busy MB",
-          axisYType: "secondary",
-          color: "#CD5555",
+          name: 'Busy MB',
+          axisYType: 'secondary',
+          color: '#CD5555',
           dataPoints: this.dataBusy
         },
         {
-          type: "stackedBar",
+          type: 'stackedBar',
           showInLegend: true,
-          name: "HWM MB",
-          axisYType: "secondary",
-          color: "#9bf09d",
+          name: 'HWM MB',
+          axisYType: 'secondary',
+          color: '#9bf09d',
           dataPoints: this.dataHighmark
         },
         {
-          type: "stackedBar",
+          type: 'stackedBar',
           showInLegend: true,
-          name: "Max Size MB",
-          axisYType: "secondary",
-          color: "#19a337",
+          name: 'Max Size MB',
+          axisYType: 'secondary',
+          color: '#19a337',
           dataPoints: this.dataMax
         }
       ]
@@ -69,7 +70,11 @@ class Chart extends Component {
 
   chartShouldUpdate() {
     let busy, highmark, max, highmarkBar, sortedTablespaces;
-    sortedTablespaces = this.props.monitoring.sort(ts => ts.tablespace);
+    sortedTablespaces = this.props.monitoring.sort( (a, b) => {
+      if(a.tablespace < b.tablespace) return -1;
+      if(a.tablespace > b.tablespace) return 1;
+      return 0;
+    });
     sortedTablespaces.forEach((ts, index) => {
       if (this.dataBusy.length === this.props.monitoring.length) {
         this.dataBusy.shift(); this.dataHighmark.shift(); this.dataMax.shift();
@@ -90,14 +95,16 @@ class Chart extends Component {
       this.realMax.push({ y: ts.max_size, label: ts.tablespace });
     });
 
-    // this.chart.data[1].options.dataPoints = this.realHighmark;
-    // this.chart.data[2].options.dataPoints = this.realMax;
+    //this.chart.data[1].options.dataPoints = this.realHighmark; 
+    //this.chart.data[2].options.dataPoints = this.realMax; 
 
     this.chart.render();
   }
 
   componentWillUpdate() {
-    this.chartHeight = this.props.monitoring.length * this.barSize;
+    if (this.props.monitoring.length > 0) {
+      this.chartHeight = this.props.monitoring.length * this.barSize;
+    }
   }
 
   componentDidUpdate() {
@@ -105,9 +112,7 @@ class Chart extends Component {
   }
 
   render() {
-    return (
-      <div id="chartContainer2" style={{ height: this.chartHeight + "px", width: 100 + "%" }}></div>
-    );
+    return <div id='chartContainer2' style={{ height: this.chartHeight + 'px', width: 100 + '%' }}></div>;
   }
 }
 

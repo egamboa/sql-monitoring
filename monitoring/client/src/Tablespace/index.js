@@ -6,7 +6,7 @@ import { SERVER_URL } from '../config';
 import Highmark from '../Common/Highmark';
 import Chart from './Chart';
 
-class Sga extends Component {
+class Tablespace extends Component {
   constructor() {
     super();
     this.intervalTime = 10000;
@@ -53,4 +53,4 @@ class Sga extends Component {
   }
 }
 
-export default Sga;
+export default Tablespace;
