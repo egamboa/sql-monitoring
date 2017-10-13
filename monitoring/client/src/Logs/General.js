@@ -12,8 +12,8 @@ class General extends Component {
             <tr>
               <td><strong>Auto Archive Mode:</strong></td>
               <td><strong>{this.props.archiveMode}</strong></td>
-              <td></td>
-              <td></td>
+              <td><strong>AAudit Trail Mode:</strong></td>
+              <td><strong>{this.props.auditTrailMode}</strong></td>
             </tr>
             <tr>
               <td><strong>Switch Time Avg:</strong></td>

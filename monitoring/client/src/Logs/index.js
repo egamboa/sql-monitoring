@@ -26,6 +26,7 @@ class Logs extends Component {
     }
     ],
     archiveMode: 'Off',
+    auditTrailMode: 'DB',
     avg: 4,
     prev: 181,
     actual: 182,
@@ -51,7 +52,8 @@ class Logs extends Component {
             avg={this.sampleData.avg} 
             prev={this.sampleData.prev} 
             actual={this.sampleData.actual}
-            next={this.sampleData.next} />
+            next={this.sampleData.next}
+            auditTrailMode={this.sampleData.auditTrailMode} />
         </Col>
       </Row>
       <Row>
