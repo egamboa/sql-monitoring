@@ -3,11 +3,12 @@ STARTUP NOMOUNT PFILE='/home/oracle/hsjd/parameters/inithsjd.ora';
 CREATE DATABASE hsjd
   USER sys IDENTIFIED BY oracle
   USER system IDENTIFIED BY oracle
-  LOGFILE GROUP 4 ('/home/oracle/hsjd/log/redo1a.log', '/home/oracle/hsjd/log/redo1b.log') SIZE 100M,
-          GROUP 5 ('/home/oracle/hsjd/log/redo2a.log', '/home/oracle/hsjd/log/redo2b.log') SIZE 100M,
+  LOGFILE GROUP 4 ('/home/oracle/hsjd/log/redo1a.log', '/home/oracle/hsjd/log/redo1b.log') SIZE 10M,
+          GROUP 5 ('/home/oracle/hsjd/log/redo2a.log', '/home/oracle/hsjd/log/redo2b.log') SIZE 10M,
+          GROUP 5 ('/home/oracle/hsjd/log/redo3a.log', '/home/oracle/hsjd/log/redo3b.log') SIZE 10M
   CHARACTER SET US7ASCII
   NATIONAL CHARACTER SET AL16UTF16
-  DATAFILE '/home/oracle/hsjd/system/instnc_ts2.dbf' SIZE 100M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED EXTENT MANAGEMENT LOCAL
+  DATAFILE '/home/oracle/hsjd/system/instnc_ts2.dbf' SIZE 200M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED EXTENT MANAGEMENT LOCAL
   SYSAUX DATAFILE '/home/oracle/hsjd/system/instnc_ts4.dbf' SIZE 100M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED
   DEFAULT TABLESPACE users
     DATAFILE '/home/oracle/hsjd/system/instnc_ts5.dbf'

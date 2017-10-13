@@ -18,7 +18,7 @@ processes=300
 # Security and Auditing
 ###########################################
 audit_file_dest='/home/oracle/app/oracle/admin/orcl/adump'
-audit_trail=DB
+audit_trail=DB,EXTENDED
 remote_login_passwordfile=EXCLUSIVE
 
 ###########################################
@@ -41,7 +41,7 @@ db_recovery_file_dest_size=4039114752
 ###########################################
 # Shared Server
 ###########################################
-dispatchers="(PROTOCOL=TCP) (SERVICE=orclXDB)"
+dispatchers="(PROTOCOL=TCP) (SERVICE=hsjd)"
 
 ###########################################
 # System Managed Undo and Rollback Segments
