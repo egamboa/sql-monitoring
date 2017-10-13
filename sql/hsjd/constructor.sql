@@ -5,7 +5,7 @@ CREATE DATABASE hsjd
   USER system IDENTIFIED BY oracle
   LOGFILE GROUP 4 ('/home/oracle/hsjd/log/redo1a.log', '/home/oracle/hsjd/log/redo1b.log') SIZE 10M,
           GROUP 5 ('/home/oracle/hsjd/log/redo2a.log', '/home/oracle/hsjd/log/redo2b.log') SIZE 10M,
-          GROUP 5 ('/home/oracle/hsjd/log/redo3a.log', '/home/oracle/hsjd/log/redo3b.log') SIZE 10M
+          GROUP 6 ('/home/oracle/hsjd/log/redo3a.log', '/home/oracle/hsjd/log/redo3b.log') SIZE 10M
   CHARACTER SET US7ASCII
   NATIONAL CHARACTER SET AL16UTF16
   DATAFILE '/home/oracle/hsjd/system/instnc_ts2.dbf' SIZE 200M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED EXTENT MANAGEMENT LOCAL
