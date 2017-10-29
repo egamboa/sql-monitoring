@@ -19,7 +19,7 @@ processes=300
 ###########################################
 audit_file_dest='/home/oracle/app/oracle/admin/orcl/adump'
 audit_trail=DB,EXTENDED
-remote_login_passwordfile=EXCLUSIVE
+remote_login_passwordfile=SHARED
 
 ###########################################
 # Cache and I/O
