@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 class Chart extends Component {
   dataMax = [];
-  dataFree = [];
   dataCurrent = [];
   dataHighmark = [];
   chart = {};
@@ -16,26 +15,19 @@ class Chart extends Component {
   }
 
   updateData = () => {  
-    var max = 0, free = 0, current = 0, highmark = 0, date = new Date();
+    var max = 0, current = 0, highmark = 0, date = new Date();
     if (this.props.monitoring.length > 0) {
       max = this.toMB(this.props.monitoring[0]['BYTES'] || 0);
       current = this.toMB(this.props.monitoring[1]['current'] || 0);
-      free = max - current;
       highmark = max - (max * (1 - (this.props.highmark / 100)));
       max = this.rounding(max);
       current = this.rounding(current);
-      free = this.rounding(free);
       highmark = this.rounding(highmark);
     }
 
     this.dataMax.push({
       x: date,
       y: max
-    });
-
-    this.dataFree.push({
-      x: date,
-      y: free
     });
 
     this.dataCurrent.push({
@@ -51,14 +43,12 @@ class Chart extends Component {
     if(this.dataCurrent.length > 49) {
       this.dataMax.shift();
       this.dataCurrent.shift();
-      this.dataFree.shift();
       this.dataHighmark.shift();
     }
 
     this.chart.options.data[0].legendText = ' Maximum SGA Size ' + this.dataMax[this.dataMax.length - 1].y + 'MB';
-    this.chart.options.data[1].legendText = ' Free SGA Memory Available ' + this.dataFree[this.dataFree.length - 1].y + 'MB';
-    this.chart.options.data[2].legendText = ' Current Allocated Memory ' + this.dataCurrent[this.dataCurrent.length - 1].y +'MB';
-    this.chart.options.data[3].legendText = ' Highwater Mark MB ' + this.dataHighmark[this.dataHighmark.length - 1].y +'MB';
+    this.chart.options.data[1].legendText = ' Current Allocated Memory ' + this.dataCurrent[this.dataCurrent.length - 1].y +'MB';
+    this.chart.options.data[2].legendText = ' Highwater Mark MB ' + this.dataHighmark[this.dataHighmark.length - 1].y +'MB';
 
     this.chart.render();
   }
@@ -91,7 +81,7 @@ class Chart extends Component {
         }
       },
       axisX: {
-        title: 'Chart updates every second',
+        title: 'Time',
         labelFontSize: 14
       },
       axisY: {
@@ -104,13 +94,6 @@ class Chart extends Component {
         showInLegend: true,
         name: 'Maximum SGA Size MB',
         dataPoints: this.dataMax
-      },
-      {
-        type: 'line',
-        xValueType: 'dateTime',
-        showInLegend: true,
-        name: 'Free SGA Memory Available MB',
-        dataPoints: this.dataFree
       },
       {
         type: 'line',

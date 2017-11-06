@@ -128,3 +128,7 @@ a:hover {
 
 
 }
+
+.has-feedback label~.form-control-feedback {
+  top: 20px;
+}

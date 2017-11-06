@@ -1,7 +1,7 @@
 package monitoring
 
 import grails.rest.*
-import grails.converters.*
+import grails.converters.JSON
 
 class MonitoringController {
 	static responseFormats = ['json', 'xml']

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Col } from 'react-bootstrap';
 
 class Chart extends Component {
   barSize = 50;
@@ -15,10 +16,6 @@ class Chart extends Component {
 
   componentDidMount() {
     this.chart = new window.CanvasJS.Chart('chartContainer2', {
-      title: {
-        text: 'Tablespace Disk Usage',
-        fontSize: 30
-      },
       animationEnabled: true,
       axisX: {
         interval: this.axisXinterval,
@@ -31,7 +28,24 @@ class Chart extends Component {
         labelFontSize: this.labelFontSize
       },
       toolTip: {
-        shared: true
+        shared: true,
+        contentFormatter: function(e) {
+          var busy = e.entries[0].dataPoint.y;
+          var high = e.entries[1].dataPoint.y;
+          var full = e.entries[2].dataPoint.y;
+
+          high = high === 0 ? 0 : busy + high;
+          full = high === 0 ? busy + full : high + full;
+
+          busy = Math.round(busy);
+          high = Math.round(high);
+          full = Math.round(full);
+
+          return ( e.entries[0].dataSeries.name + ' ' + busy + ' MB<br>'
+                  + e.entries[1].dataSeries.name + ' ' + high + ' MB<br>'
+                  + e.entries[2].dataSeries.name + ' ' + full + ' MB'
+                );
+        }
       },
       legend: {
         fontSize: this.labelFontSize,
@@ -91,28 +105,22 @@ class Chart extends Component {
       this.dataBusy.push({ y: busy, label: ts.tablespace });
       this.dataHighmark.push({ y: highmarkBar, label: ts.tablespace });
       this.dataMax.push({ y: max, label: ts.tablespace });
-      this.realHighmark.push({ y: highmark, label: ts.tablespace });
-      this.realMax.push({ y: ts.max_size, label: ts.tablespace });
     });
-
-    //this.chart.data[1].options.dataPoints = this.realHighmark; 
-    //this.chart.data[2].options.dataPoints = this.realMax; 
 
     this.chart.render();
   }
 
-  componentWillUpdate() {
-    if (this.props.monitoring.length > 0) {
-      this.chartHeight = this.props.monitoring.length * this.barSize;
+  componentDidUpdate() {
+    if(this.props.monitoring) {
+      this.chartShouldUpdate();
     }
   }
 
-  componentDidUpdate() {
-    this.chartShouldUpdate();
-  }
-
   render() {
-    return <div id='chartContainer2' style={{ height: this.chartHeight + 'px', width: 100 + '%' }}></div>;
+    return <Col xs={12}>
+      <h1><strong>Tablespace Monitoring</strong></h1>
+      <div id='chartContainer2' style={{ height: this.chartHeight + 'px', width: 100 + '%' }}></div>
+    </Col>
   }
 }
 

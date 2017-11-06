@@ -35,18 +35,16 @@ class App extends Component {
       <div>
         <AppNav serverInfo={serverInfo} clientInfo={clientInfo} />
         <Grid>
-          <div>
-            <section>
-              <Row>
-                <Col xs={12}>
-                  <h1>Oracle SQL Server Monitoring</h1>
-                  <p>This is a grails web application connecting to Oracle SQL server.</p>
-                  <br /><hr /><br />
-                </Col>
-              </Row>
-            </section>
-            <Main />
-          </div>
+          <section>
+            <Row>
+              <Col xs={12}>
+                <h1>Oracle SQL Server Monitoring</h1>
+                <p>This is a grails web application connecting to Oracle SQL server.</p>
+                <br /><hr /><br />
+              </Col>
+            </Row>
+          </section>
+          <Main />
         </Grid>
       </div>
     );

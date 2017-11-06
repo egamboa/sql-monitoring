@@ -12,22 +12,18 @@ class Highmark extends Component {
 
   render() {
     return (
-      <form>
-        <FormGroup
-          controlId="formBasicText"
-          validationState={this.getValidationState()}
-        >
-          <ControlLabel>Add a High Water % Mark to return warnings</ControlLabel>
-          <FormControl
-            type="text"
-            value={this.props.highmark}
-            placeholder="Enter text"
-            onChange={this.props.handleChange}
-          />
-          <FormControl.Feedback />
-          <HelpBlock>This should be a number</HelpBlock>
-        </FormGroup>
-      </form>
+      <FormGroup
+        controlId="formBasicText"
+        validationState={this.getValidationState()}>
+        <ControlLabel>High Water Mark %</ControlLabel>
+        <FormControl
+          type="text"
+          value={this.props.highmark}
+          placeholder="Enter text"
+          onChange={this.props.handleChange} />
+        <FormControl.Feedback />
+        <HelpBlock>This should be a number</HelpBlock>
+      </FormGroup>
     );
   }
 }

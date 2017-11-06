@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Row, Col, Button } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 
 class General extends Component {
 
