@@ -17,7 +17,10 @@ class MonitoringController {
                 result = monitoringService.getSqls()
             break
             case 'ts':
-                result = monitoringService.getTablespace()
+                result = monitoringService.getTablespaces()
+            break
+            case 'getts':
+                result = monitoringService.getTablespace(params.ts)
             break
         }
         render result as JSON

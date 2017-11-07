@@ -11,22 +11,29 @@ class CurrentTablespace extends Component {
   }
 
   handleChange = (e) => {
-    this.setState({ highmark: e.target.value });
+    this.props.changeTs(this.inputEl.value);
   }
 
   render() {
+    let highmarkElem;
     let options = this.props.tablespaces.map((ts, index) => {
-      return <option key={index} value="select">{ts.tablespace}</option>
-    })
+      return <option key={index} value={ts.tablespace}>{ts.tablespace}</option>
+    });
+
+    if(this.props.current.length > 0) {
+      highmarkElem = <Highmark highmark={this.state.highmark} handleChange={this.handleChange}></Highmark>;
+    }
+
     return (
       <form>
         <FormGroup controlId="formControlsSelect">
           <ControlLabel>Choose: </ControlLabel>
-          <FormControl componentClass="select" placeholder="select">
+          <FormControl onChange={this.handleChange.bind(this)} inputRef={ el => this.inputEl=el } componentClass="select" placeholder="select">
+            <option value="none">select</option>
             {options}
           </FormControl>
         </FormGroup>
-        <Highmark highmark={this.state.highmark} handleChange={this.handleChange}></Highmark>
+        {highmarkElem}
       </form>
     );
   }

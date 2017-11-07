@@ -9,33 +9,43 @@ import CurrentTablespace from './CurrentTablespace';
 class Tablespace extends Component {
   constructor() {
     super();
-    this.intervalTime = 3000;
-    this.state = {
-      highmark: '80'
-    }
+    this.intervalTime = 10000;
+    this.state = { current: [] }
     this.intervalInstance = null;
   }
 
   componentDidMount() {
+    this.fetchingTS();
     this.intervalInstance = setInterval(() => {
-      fetch(SERVER_URL + 'monitoring?type=ts')
-        .then(r => r.json())
-        .then(json => this.setState({ monitoring: json }))
-        .catch(error => console.error('Error connecting to server: ' + error));
+      this.fetchingTS();
     }, this.intervalTime);
+  }
+
+  fetchingTS () {
+    fetch(SERVER_URL + 'monitoring?type=ts')
+    .then(r => r.json())
+    .then(json => this.setState({ monitoring: json }))
+    .catch(error => console.error('Error connecting to server: ' + error));
   }
 
   componentWillUnmount() {
     clearInterval(this.intervalInstance);
   }
 
+  changeTs = (newTablespace) => {  
+    fetch(SERVER_URL + 'monitoring?type=getts&ts=' + newTablespace )
+      .then(r => r.json())
+      .then(json => this.setState({ current: json }))
+      .catch(error => console.error('Error connecting to server: ' + error));  
+  }
+
   render() {
     return <section>
       <Row>
-        <Chart monitoring={this.state.monitoring} highmark={this.state.highmark} />
+        <Chart monitoring={this.state.monitoring} />
       </Row>
       <Row>
-        <CurrentTablespace monitoring={this.state.monitoring} />
+        <CurrentTablespace changeTs={this.changeTs} current={this.state.current} monitoring={this.state.monitoring} />
       </Row>
       <Row>
         <br /><hr /><br />

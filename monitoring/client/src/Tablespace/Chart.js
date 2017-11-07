@@ -83,7 +83,7 @@ class Chart extends Component {
   }
 
   chartShouldUpdate() {
-    let busy, highmark, max, highmarkBar, sortedTablespaces;
+    let busy, highmark, max, highmarkBar, sortedTablespaces, tsHighmark;
     sortedTablespaces = this.props.monitoring.sort( (a, b) => {
       if(a.tablespace < b.tablespace) return -1;
       if(a.tablespace > b.tablespace) return 1;
@@ -93,8 +93,9 @@ class Chart extends Component {
       if (this.dataBusy.length === this.props.monitoring.length) {
         this.dataBusy.shift(); this.dataHighmark.shift(); this.dataMax.shift();
       }
+      if(!ts.highmark) { tsHighmark = 80 } else { tsHighmark = ts.highmark }
       busy = ts.max_size - ts.free;
-      highmark = ts.max_size - (ts.max_size * (1 - (this.props.highmark / 100)));
+      highmark = ts.max_size - (ts.max_size * (1 - (tsHighmark / 100)));
       highmarkBar = highmark - busy;
       if (highmarkBar > 0) {
         max = ts.max_size - (highmarkBar + busy);
