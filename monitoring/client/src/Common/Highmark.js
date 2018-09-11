@@ -22,7 +22,7 @@ class Highmark extends Component {
           placeholder="Enter text"
           onChange={this.props.handleChange} />
         <FormControl.Feedback />
-        <HelpBlock>This should be a number</HelpBlock>
+        <HelpBlock>Only numbers</HelpBlock>
       </FormGroup>
     );
   }

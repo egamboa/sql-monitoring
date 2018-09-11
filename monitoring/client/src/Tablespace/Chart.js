@@ -93,7 +93,13 @@ class Chart extends Component {
       if (this.dataBusy.length === this.props.monitoring.length) {
         this.dataBusy.shift(); this.dataHighmark.shift(); this.dataMax.shift();
       }
-      if(!ts.highmark) { tsHighmark = 80 } else { tsHighmark = ts.highmark }
+      if(!(ts.tablespace in this.props.marks)) {
+        console.log('here 1?');
+        tsHighmark = 80;
+      } else {
+        console.log('here 2?', this.props.marks[ts.tablespace].value);
+        tsHighmark = this.props.marks[ts.tablespace].value;
+      }
       busy = ts.max_size - ts.free;
       highmark = ts.max_size - (ts.max_size * (1 - (tsHighmark / 100)));
       highmarkBar = highmark - busy;

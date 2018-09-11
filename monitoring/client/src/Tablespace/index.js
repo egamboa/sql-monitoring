@@ -10,42 +10,60 @@ class Tablespace extends Component {
   constructor() {
     super();
     this.intervalTime = 10000;
-    this.state = { current: [] }
+    this.state = { current: [], marks: {} }
     this.intervalInstance = null;
   }
 
   componentDidMount() {
-    this.fetchingTS();
+    this.fetchingTS().then(() => {
+      this.addMarks();
+    });
     this.intervalInstance = setInterval(() => {
       this.fetchingTS();
     }, this.intervalTime);
-  }
-
-  fetchingTS () {
-    fetch(SERVER_URL + 'monitoring?type=ts')
-    .then(r => r.json())
-    .then(json => this.setState({ monitoring: json }))
-    .catch(error => console.error('Error connecting to server: ' + error));
   }
 
   componentWillUnmount() {
     clearInterval(this.intervalInstance);
   }
 
-  changeTs = (newTablespace) => {  
-    fetch(SERVER_URL + 'monitoring?type=getts&ts=' + newTablespace )
+  addMarks = () => {
+    this.state.monitoring.forEach(ts => {
+      if (!(ts.tablespace in this.state.marks)) {
+        this.setMark(ts.tablespace, 80);
+      }
+    });
+  }
+
+  setMark = (tablespace, newValue) => {
+    var newMarks = Object.assign({}, this.state.marks);
+    newMarks[tablespace] = {
+      value: newValue
+    }
+    this.setState({ marks: newMarks });
+  }
+
+  fetchingTS = () => {
+    return fetch(SERVER_URL + 'monitoring?type=ts')
+      .then(r => r.json())
+      .then(json => this.setState({ monitoring: json }))
+      .catch(error => console.error('Error connecting to server: ' + error));
+  }
+
+  changeTs = (newTablespace) => {
+    fetch(SERVER_URL + 'monitoring?type=getts&ts=' + newTablespace)
       .then(r => r.json())
       .then(json => this.setState({ current: json }))
-      .catch(error => console.error('Error connecting to server: ' + error));  
+      .catch(error => console.error('Error connecting to server: ' + error));
   }
 
   render() {
     return <section>
       <Row>
-        <Chart monitoring={this.state.monitoring} />
+        <Chart marks={this.state.marks} monitoring={this.state.monitoring} />
       </Row>
       <Row>
-        <CurrentTablespace changeTs={this.changeTs} current={this.state.current} monitoring={this.state.monitoring} />
+        <CurrentTablespace updateMark={this.setMark} changeTs={this.changeTs} current={this.state.current} monitoring={this.state.monitoring} />
       </Row>
       <Row>
         <br /><hr /><br />

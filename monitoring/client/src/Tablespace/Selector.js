@@ -14,6 +14,12 @@ class CurrentTablespace extends Component {
     this.props.changeTs(this.inputEl.value);
   }
 
+  changeHighmark = (e) => {
+    this.setState({ highmark: e.target.value }, () => {
+      this.props.updateMark(this.state.highmark);
+    });
+  }
+
   render() {
     let highmarkElem;
     let options = this.props.tablespaces.map((ts, index) => {
@@ -21,7 +27,7 @@ class CurrentTablespace extends Component {
     });
 
     if(this.props.current.length > 0) {
-      highmarkElem = <Highmark highmark={this.state.highmark} handleChange={this.handleChange}></Highmark>;
+      highmarkElem = <Highmark highmark={this.state.highmark} handleChange={this.changeHighmark}></Highmark>;
     }
 
     return (
