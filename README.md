@@ -19,4 +19,4 @@ To run both client & server projects in parallel, use the Gradle wrapper:
 For support, please use the Groovy Community Slack (https://groovycommunity.slack.com/) or open an issue on Github: https://github.com/grails-profiles/react/issues
 
 Adding JDBC driver for oracle
-mvn install:install-file -Dfile=ojdbc7.jar -DgroupId=com.oracle -DDpackaging=jarbc7 -Dversion=12.1.0.1 -D
+mvn install:install-file -Dfile=ojdbc7.jar -DgroupId=com.oracle -DDpackaging=jarbc7 -Dversion=12.1.0.1 -DartifactId=ojdbc7
