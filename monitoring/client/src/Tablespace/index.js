@@ -4,7 +4,6 @@ import 'whatwg-fetch';
 
 import { SERVER_URL } from '../config';
 import Chart from './Chart';
-import CurrentTablespace from './CurrentTablespace';
 
 class Tablespace extends Component {
   constructor() {

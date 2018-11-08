@@ -4,7 +4,6 @@ import 'whatwg-fetch';
 
 import { SERVER_URL } from '../config';
 import Chart from './Chart';
-import Highmark from '../Common/Highmark';
 import Queries from './Queries';
 
 class Sga extends Component {
