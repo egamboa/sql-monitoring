@@ -86,11 +86,11 @@ environments:
     development:
         dataSource:
             dbCreate: validate
-            url: jdbc:oracle:thin:@192.168.56.101:1521:orcl
+            url: jdbc:oracle:thin:@127.0.0.1:1521:orcl
             driverClassName: oracle.jdbc.OracleDriver
             dialect: org.hibernate.dialect.Oracle10gDialect
             username: sys as sysdba
-            password: oracle
+            password: Oracle123
     test:
         dataSource:
             dbCreate: update

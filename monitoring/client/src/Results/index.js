@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Sga from '../Sga';
 import Tablespace from '../Tablespace';
-import Logs from '../Logs';
 
 class Results extends Component {
 
@@ -9,7 +8,6 @@ class Results extends Component {
     return <div>
       <Sga></Sga>
       <Tablespace></Tablespace>
-      <Logs></Logs>
     </div>
   }
 }
