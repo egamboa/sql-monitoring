@@ -8,18 +8,21 @@ function AppNav () {
     <Navbar inverse collapseOnSelect>
       <Navbar.Header>
         <Navbar.Brand>
-          <i class="fas fa-database"></i> Performance Monitor
+          <i className="fas fa-database"></i> Performance Monitor
         </Navbar.Brand>
       </Navbar.Header>
       <Nav>
         <IndexLinkContainer to="/">
-          <NavItem>Sga</NavItem>
+          <NavItem>Login</NavItem>
         </IndexLinkContainer>
-        <LinkContainer to="/tablespace">
-          <NavItem>Tablespaces</NavItem>
+        <LinkContainer to="/connections">
+          <NavItem>Connections</NavItem>
         </LinkContainer>
-        <LinkContainer to="/logs">
-          <NavItem>Logs</NavItem>
+        <LinkContainer to="/newcon">
+          <NavItem>New Connection</NavItem>
+        </LinkContainer>
+        <LinkContainer to="/results">
+          <NavItem>Results</NavItem>
         </LinkContainer>
       </Nav>
     </Navbar>);

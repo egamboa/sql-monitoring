@@ -13,7 +13,7 @@ class App extends Component {
           <section>
             <Row>
               <Col xs={12}>
-                <h1>Oracle SQL Server Monitoring</h1>
+                <h1>Performance Monitor para sistemas de bases de datos distribuidas</h1>
                 <p>This is a grails web application connecting to Oracle SQL server.</p>
                 <br /><hr /><br />
               </Col>
