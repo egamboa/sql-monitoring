@@ -10,12 +10,10 @@ function AppNav ({serverInfo, clientInfo}) {
   const {environment, appprofile, appversion, grailsversion, reloadingagentenabled, artefacts, plugins} = serverInfo; 
 
   return (
-    <Navbar style={{backgroundColor: '#4D8618', backgroundImage: 'none', borderRadius: 0}}>
+    <Navbar inverse collapseOnSelect>
       <Navbar.Header>
         <Navbar.Brand>
-          <i className="fa grails-icon">
-            <img src={grailsLogo} alt="Grails" />
-          </i> Grails
+          <i class="fas fa-database"></i> Performance Monitor
         </Navbar.Brand>
         <Navbar.Toggle />
       </Navbar.Header>
@@ -40,26 +38,20 @@ function AppNav ({serverInfo, clientInfo}) {
             <MenuItem divider />
             <MenuItem eventKey="4.4">Reloading active: {reloadingagentenabled ? 'true' : 'false'}</MenuItem>
           </NavDropdown>
-
           <NavDropdown eventKey="4" title="Artefacts " id="artefacts">
             <MenuItem eventKey="4.1">Controllers: {artefacts ? artefacts.controllers : 0}</MenuItem>
             <MenuItem eventKey="4.2">Domains: {artefacts ? artefacts.domains : 0}</MenuItem>
             <MenuItem eventKey="4.3">Services: {artefacts ? artefacts.services : 0}</MenuItem>
           </NavDropdown>
-
           <NavDropdown eventKey="4" title="Installed Plugins " id="plugins">
-
             {plugins ? plugins.map(plugin => {
               return <MenuItem eventKey="4.1" key={plugin.name}>{plugin.name} - {plugin.version}</MenuItem>
             }) : null
             }
-
-
           </NavDropdown>
         </Nav>
-      </Navbar.Collapse>
-    </Navbar>);
-
+        </Navbar.Collapse>
+      </Navbar>);
 }
 
 export default AppNav;
