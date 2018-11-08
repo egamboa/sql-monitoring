@@ -63,9 +63,6 @@ class Tablespace extends Component {
         <Chart marks={this.state.marks} monitoring={this.state.monitoring} />
       </Row>
       <Row>
-        <CurrentTablespace updateMark={this.setMark} changeTs={this.changeTs} current={this.state.current} monitoring={this.state.monitoring} />
-      </Row>
-      <Row>
         <br /><hr /><br />
       </Row>
     </section>

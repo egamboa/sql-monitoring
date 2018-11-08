@@ -124,7 +124,7 @@ class Chart extends Component {
   }
 
   render() {
-    return <Col xs={12}>
+    return <Col sm={12}>
       <h1><strong>Tablespace Monitoring</strong></h1>
       <div id='chartContainer2' style={{ height: this.chartHeight + 'px', width: 100 + '%' }}></div>
     </Col>

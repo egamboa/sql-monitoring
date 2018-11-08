@@ -63,14 +63,13 @@ class Sga extends Component {
     let queries = this.state.queries.length > 0 ? <Queries queries={this.state.queries} /> : '';
     return <section>
       <Row className="show-grid">
-        <Col xs={4}>
+        <Col sm={4}>
           <h1><strong>SGA Memory Monitoring</strong></h1>
           <br />
-          <Highmark highmark={this.state.highmark} handleChange={this.handleChange}></Highmark>
         </Col>
       </Row>
       <Row>
-        <Col xs={12}>
+        <Col sm={12}>
           <Chart monitoring={this.state.monitoring} highmark={this.state.highmark} />
         </Col>
       </Row>
